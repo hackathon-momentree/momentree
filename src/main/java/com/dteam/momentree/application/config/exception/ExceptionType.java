@@ -16,7 +16,10 @@ public enum ExceptionType {
     USER_NOT_FOUND("존재하지 않는 유저입니다.",410),
     DIARY_NOT_FOUND("존재하지 않는 일기입니다", 412),
     DAY_NOT_FOUND("날짜 범위를 벗어났습니다", 413),
-    DAY_ALREADY_EXISTS("이미 존재하는 day 값입니다.", 414);
+    DAY_ALREADY_EXISTS("이미 존재하는 day 값입니다.", 414),
+    INVALID_LOCATION("유효하지 않은 위치입니다", 415),
+    LOCATION_ALREADY_USED("해당 위치는 이미 사용 중입니다", 416),
+    NO_DIARY_IN_LOCATION("해당 영역에는 일기가 없습니다.", 417);
 
     private final String message;
     private final int code;

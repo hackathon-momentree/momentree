@@ -19,7 +19,7 @@ public class Diary extends UserBaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = true)
+    @Column(nullable = true, unique = true)
     private Long location;
 
     @Column(nullable = false)
@@ -35,4 +35,7 @@ public class Diary extends UserBaseEntity {
     @Column(nullable = false, unique = true)
     private int day;
 
+    public void setLocation(Long location) {
+        this.location = location;
+    }
 }
