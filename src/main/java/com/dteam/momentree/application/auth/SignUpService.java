@@ -18,6 +18,9 @@ public class SignUpService {
     private final UserService userService;
 
     public Long signUp(SignUpRequest request){
+        if(request.loginId() == null || request.loginId().isEmpty()){
+            throw new BadRequestException(ExceptionType.INVALID_INPUT);
+        }
         checkRequestValidation(request);
         String encryptedPassword = PasswordUtil.encryptPassword(request.password());
         User user = User.of(request.loginId(), encryptedPassword);

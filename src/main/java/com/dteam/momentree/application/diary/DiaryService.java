@@ -24,12 +24,16 @@ public class DiaryService {
     private final DiaryRepository diaryRepository;
 
     public DiaryResponse createDiary(DiaryRequest request, int day, Long userId) {
+        if(request.getContent() == null){
+            throw new BadRequestException(ExceptionType.INVALID_INPUT);
+        }
         if (day < 1 || day > 31) {
             throw new BadRequestException(ExceptionType.DAY_NOT_FOUND);
         }
 
         if (diaryRepository.existsByCreateUserAndDay(userId, day)) {
             throw new BadRequestException(ExceptionType.DAY_ALREADY_EXISTS);
+
         }
 
         Diary diary = Diary.builder()
