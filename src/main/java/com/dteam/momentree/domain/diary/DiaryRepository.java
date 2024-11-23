@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DiaryRepository extends JpaRepository<Diary, Long> {
-    Optional<Diary> findByDay(int day);
+    Optional<Diary> findByCreateUserAndDay(Long createUser, int day);
 
-    boolean existsByDay(int day);
+    boolean existsByCreateUserAndDay(Long createUser, int day);
 
-    boolean existsByLocation(Long location);
+    boolean existsByCreateUserAndLocation(Long createUser, Long location);
 
-    Optional<Diary> findByLocation(Long location);
+    Optional<Diary> findByCreateUserAndLocation(Long createUser, Long location);
 
-    @Query("SELECT d FROM Diary d WHERE d.location IS NULL")
-    List<Diary> findDiariesWithoutLocation();
+    @Query("SELECT d FROM Diary d WHERE d.location IS NULL AND d.createUser = :createUser")
+    List<Diary> findDiariesWithoutLocationByUser(Long createUser);
 }
