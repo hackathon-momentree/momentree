@@ -9,6 +9,7 @@ import com.dteam.momentree.application.config.exception.BadRequestException;
 import com.dteam.momentree.application.config.exception.ExceptionType;
 import com.dteam.momentree.domain.diary.Diary;
 import com.dteam.momentree.domain.diary.DiaryRepository;
+import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -107,6 +108,7 @@ public class DiaryService {
     }
 
     public void update(Long userId, DiaryUpdateRequest updateRequest) {
+        if(StringUtils.isEmpty(updateRequest.getContent())) throw new BadRequestException(ExceptionType.INVALID_INPUT);
         Diary diary = diaryRepository.findById(updateRequest.getId())
                 .orElseThrow(() -> new BadRequestException(ExceptionType.DIARY_NOT_FOUND));
         if(!userId.equals(diary.getCreateUser())) throw new BadRequestException(ExceptionType.FORBIDDEN);

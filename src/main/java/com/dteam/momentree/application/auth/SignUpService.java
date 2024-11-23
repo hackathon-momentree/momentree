@@ -6,6 +6,7 @@ import com.dteam.momentree.application.util.PasswordUtil;
 import com.dteam.momentree.application.config.exception.BadRequestException;
 import com.dteam.momentree.application.config.exception.ExceptionType;
 import com.dteam.momentree.domain.user.User;
+import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class SignUpService {
     private final UserService userService;
 
     public Long signUp(SignUpRequest request){
-        if(request.loginId() == null || request.loginId().isEmpty()){
+        if(StringUtils.isEmpty(request.loginId()) || StringUtils.isEmpty(request.password())){
             throw new BadRequestException(ExceptionType.INVALID_INPUT);
         }
         checkRequestValidation(request);
