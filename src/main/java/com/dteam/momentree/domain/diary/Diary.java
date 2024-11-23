@@ -32,4 +32,7 @@ public class Diary extends UserBaseEntity {
     @Enumerated(EnumType.STRING)
     private OpenStatus openStatus;
 
+    @Column(nullable = false, unique = true)
+    private int day;
+
 }
