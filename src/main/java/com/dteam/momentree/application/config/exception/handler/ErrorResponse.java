@@ -24,4 +24,8 @@ public record ErrorResponse (
     public static ErrorResponse illegalArgumentError(Map<String, String> argumentMessages) {
         return new ErrorResponse(400, "잘못된 요청입니다.", argumentMessages);
     }
+
+    public static ErrorResponse badRequestError() {
+        return new ErrorResponse(400, "잘못된 요청입니다.", null);
+    }
 }
