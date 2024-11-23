@@ -1,5 +1,6 @@
 package com.dteam.momentree.application.diary;
 
+import com.dteam.momentree.api.diary.DiaryController;
 import com.dteam.momentree.api.diary.dto.DiaryRequest;
 import com.dteam.momentree.api.diary.dto.DiaryResponse;
 import com.dteam.momentree.api.diary.dto.ReadDiaryResponse;
@@ -98,6 +99,10 @@ public class DiaryService {
                         .day(diary.getDay())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    public void update(Long userId, DiaryController.UpdateRequest updateRequest) {
+
     }
 }
 
