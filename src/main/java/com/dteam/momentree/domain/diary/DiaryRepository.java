@@ -1,4 +1,4 @@
-package com.dteam.momentree.domain.dairy;
+package com.dteam.momentree.domain.diary;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
