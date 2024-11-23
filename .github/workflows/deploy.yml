@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '17' # 필요한 Java 버전
+          java-version: '17'
 
       - name: Build with Gradle
         run: ./gradlew build
@@ -30,6 +30,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
+          S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
 
       - name: Deploy with CodeDeploy
         run: |
