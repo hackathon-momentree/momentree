@@ -44,8 +44,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({Exception.class})
     public ResponseEntity<ErrorResponse> handleBadRequestException(final Exception e) {
         log.error("An unexpected error occurred", e);
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(ErrorResponse.serverError());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(ErrorResponse.badRequestError());
     }
 
 }
