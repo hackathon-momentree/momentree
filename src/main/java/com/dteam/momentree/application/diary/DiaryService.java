@@ -26,6 +26,13 @@ public class DiaryService {
     private final DiaryImageRepository diaryImageRepository;
 
 
+    /**
+     * 일기 생성 메서드
+     *
+     * @param request 일기 생성 요청
+     * @param day 일기가 작성된 날짜
+     * @return 생성된 DiaryResponse
+     */
     public DiaryResponse createDiary(DiaryRequest request, int day) {
 
         if (day < 1 || day > 31) {
@@ -40,7 +47,7 @@ public class DiaryService {
                 .title(request.getTitle())
                 .content(request.getContent())
                 .openStatus(request.getOpenStatus())
-                .day(day) // day 값 저장
+                .day(day)
                 .build();
 
 
@@ -87,6 +94,50 @@ public class DiaryService {
                 .build();
     }
 
+    public void assignLocationToDiary(int day, Long location) {
+        if (location < 1 || location > 18) {
+            throw new BadRequestException(ExceptionType.INVALID_LOCATION);
+        }
 
+        if (diaryRepository.existsByLocation(location)) {
+            throw new BadRequestException(ExceptionType.LOCATION_ALREADY_USED);
+        }
+
+        Diary diary = diaryRepository.findByDay(day)
+                .orElseThrow(() -> new BadRequestException(ExceptionType.DIARY_NOT_FOUND));
+
+        diary.setLocation(location);
+        diaryRepository.save(diary);
+    }
+
+    public void unassignLocation(Long location) {
+        if (location < 1 || location > 18) {
+            throw new BadRequestException(ExceptionType.INVALID_LOCATION);
+        }
+
+        Diary diary = diaryRepository.findByLocation(location)
+                .orElseThrow(() -> new BadRequestException(ExceptionType.NO_DIARY_IN_LOCATION));
+
+        diary.setLocation(null);
+        diaryRepository.save(diary);
+    }
+
+    public List<ReadDiaryResponse> getDiariesWithoutLocation() {
+
+        List<Diary> diaries = diaryRepository.findDiariesWithoutLocation();
+
+        // ReadDiaryResponse로 변환하여 반환
+        return diaries.stream()
+                .map(diary -> ReadDiaryResponse.builder()
+                        .title(diary.getTitle())
+                        .content(diary.getContent())
+                        .openStatus(diary.getOpenStatus())
+                        .day(diary.getDay())
+                        .imageUrls(diaryImageRepository.findByDiary(diary).stream()
+                                .map(DiaryImage::getDiaryImageUrl)
+                                .collect(Collectors.toList()))
+                        .build())
+                .collect(Collectors.toList());
+    }
 
 }
