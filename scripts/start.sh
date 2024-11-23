@@ -7,11 +7,11 @@ ERROR_LOG="$ROOT_PATH/error.log"
 START_LOG="$ROOT_PATH/start.log"
 NOW=$(date +%c)
 
-echo "[$NOW] $JAR 복사" >> $START_LOG
+echo "[$NOW] $JAR copy" >> $START_LOG
 cp "$ROOT_PATH/build/libs/backend.jar" "$JAR"
 
-echo "[$NOW] > $JAR 실행" >> $START_LOG
+echo "[$NOW] > $JAR execute" >> $START_LOG
 nohup java -Duser.timezone=Asia/Seoul -jar $JAR > $APP_LOG 2> $ERROR_LOG &
 
 SERVICE_PID=$(pgrep -f $JAR)
-echo "[$NOW] > 서비스 PID: $SERVICE_PID" >> $START_LOG
+echo "[$NOW] > service PID: $SERVICE_PID" >> $START_LOG

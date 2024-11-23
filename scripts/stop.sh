@@ -6,8 +6,8 @@ STOP_LOG="$ROOT_PATH/stop.log"
 SERVICE_PID=$(pgrep -f $JAR)
 
 if [ -z "$SERVICE_PID" ]; then
-  echo "서비스 NouFound" >> $STOP_LOG
+  echo "service NouFound" >> $STOP_LOG
 else
-  echo "서비스 종료 " >> $STOP_LOG
+  echo "service terminate " >> $STOP_LOG
   kill "$SERVICE_PID"
 fi
