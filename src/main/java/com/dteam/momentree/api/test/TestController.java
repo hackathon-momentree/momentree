@@ -18,15 +18,15 @@ public class TestController {
     private final TestService testService;
     private final LocalDateTime version = LocalDateTime.now();
 
-    @GetMapping("/{string}")
-    public Long test(@PathVariable String string){
-        return testService.save(string);
-    }
+//    @GetMapping("/{string}")
+//    public Long test(@PathVariable String string){
+//        return testService.save(string);
+//    }
 
-    @GetMapping("/find")
-    public List<Test> findList(){
-        return testService.findList();
-    }
+//    @GetMapping("/find")
+//    public List<Test> findList(){
+//        return testService.findList();
+//    }
 
     @GetMapping("/whoami")
     public Long findList(@Auth LoginUser user){
