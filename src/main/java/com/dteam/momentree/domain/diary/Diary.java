@@ -14,16 +14,17 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(
+        name = "diary",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"day", "createUser"})}
+)
 public class Diary extends UserBaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = true, unique = true)
+    @Column(nullable = true)
     private Long location;
-
-    @Column(nullable = false)
-    private String title;
 
     @Column(nullable = false)
     private String content;
@@ -32,7 +33,7 @@ public class Diary extends UserBaseEntity {
     @Enumerated(EnumType.STRING)
     private OpenStatus openStatus;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private int day;
 
     public void setLocation(Long location) {
