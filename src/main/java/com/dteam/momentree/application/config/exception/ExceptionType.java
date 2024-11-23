@@ -18,6 +18,7 @@ public enum ExceptionType {
     DAY_NOT_FOUND("날짜 범위를 벗어났습니다", 400),
     DAY_ALREADY_EXISTS("이미 존재하는 day 값입니다.", 409),
     INVALID_LOCATION("유효하지 않은 위치입니다", 404),
+    FORBIDDEN("권한이 없습니다.", 403),
     LOCATION_ALREADY_USED("해당 위치는 이미 사용 중입니다", 409),
     NO_DIARY_IN_LOCATION("해당 영역에는 일기가 없습니다.", 404);
 

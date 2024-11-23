@@ -2,6 +2,7 @@ package com.dteam.momentree.api.diary;
 
 import com.dteam.momentree.api.diary.dto.DiaryRequest;
 import com.dteam.momentree.api.diary.dto.DiaryResponse;
+import com.dteam.momentree.api.diary.dto.DiaryUpdateRequest;
 import com.dteam.momentree.api.diary.dto.ReadDiaryResponse;
 import com.dteam.momentree.application.config.auth.Auth;
 import com.dteam.momentree.application.config.auth.LoginUser;
@@ -74,14 +75,9 @@ public class DiaryController {
     }
 
     @PostMapping("/update")
-    public void update(@Auth LoginUser user, @RequestBody UpdateRequest updateRequest) {
+    public void update(@Auth LoginUser user, @RequestBody DiaryUpdateRequest updateRequest) {
         diaryService.update(user.getUserId(), updateRequest);
     }
 
-    @AllArgsConstructor
-    public static class UpdateRequest {
-        private Long id;
-        private String content;
 
-    }
 }

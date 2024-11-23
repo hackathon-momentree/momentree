@@ -15,6 +15,8 @@ public interface DiaryRepository extends JpaRepository<Diary, Long> {
 
     Optional<Diary> findByCreateUserAndLocation(Long createUser, Long location);
 
+    Optional<Diary> findById(Long id);
+
     @Query("SELECT d FROM Diary d WHERE d.location IS NULL AND d.createUser = :createUser")
     List<Diary> findDiariesWithoutLocationByUser(Long createUser);
 }

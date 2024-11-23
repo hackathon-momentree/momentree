@@ -39,4 +39,8 @@ public class Diary extends UserBaseEntity {
     public void setLocation(Long location) {
         this.location = location;
     }
+
+    public void updateContent(String content) {
+        this.content = content;
+    }
 }

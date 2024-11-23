@@ -3,6 +3,7 @@ package com.dteam.momentree.application.diary;
 import com.dteam.momentree.api.diary.DiaryController;
 import com.dteam.momentree.api.diary.dto.DiaryRequest;
 import com.dteam.momentree.api.diary.dto.DiaryResponse;
+import com.dteam.momentree.api.diary.dto.DiaryUpdateRequest;
 import com.dteam.momentree.api.diary.dto.ReadDiaryResponse;
 import com.dteam.momentree.application.config.exception.BadRequestException;
 import com.dteam.momentree.application.config.exception.ExceptionType;
@@ -101,8 +102,11 @@ public class DiaryService {
                 .collect(Collectors.toList());
     }
 
-    public void update(Long userId, DiaryController.UpdateRequest updateRequest) {
-
+    public void update(Long userId, DiaryUpdateRequest updateRequest) {
+        Diary diary = diaryRepository.findById(updateRequest.getId())
+                .orElseThrow(() -> new BadRequestException(ExceptionType.DIARY_NOT_FOUND));
+        if(!userId.equals(diary.getCreateUser())) throw new BadRequestException(ExceptionType.FORBIDDEN);
+        diary.updateContent(updateRequest.getContent());
     }
 }
 
