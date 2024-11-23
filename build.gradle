@@ -12,6 +12,10 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
+bootJar {
+    archiveFileName = 'backend.jar'
+}
+
 repositories {
     mavenCentral()
 }

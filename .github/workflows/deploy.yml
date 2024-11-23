@@ -19,6 +19,10 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Create application.yml files
+        run: |
+          echo "${{ secrets.APPLICATION_YAML}}" > src/main/resources/application.yml
+
       - name: Build with Gradle
         run: ./gradlew build
 

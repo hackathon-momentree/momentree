@@ -30,7 +30,14 @@ public class PresentController {
     private final UserService userService;
 
     @PostMapping("/{ownerId}")
-    @Operation(summary = "방명록 작성 API", description = "방명록을 작성하는 API입니다.")
+    @Operation(
+            summary = "방명록 작성 API",
+            description = """
+                방명록을 작성하는 API입니다. 
+                - **ownerId**는 방명록 소유자의 login ID(String)을 나타냅니다.
+                - 요청 본문에는 방명록 내용과 작성자 닉네임, 작성한 날짜가 포함되어야 합니다.
+                """
+    )
     public ResponseEntity<PresentResponse.PresentResultDTO> writePresent(
             @RequestBody PresentRequest.PresentDTO presentDTO,
             @PathVariable(name = "ownerId") String ownerId) {
@@ -46,7 +53,13 @@ public class PresentController {
     }
 
     @GetMapping("/")
-    @Operation(summary = "내가 받은 방명록 조회 API")
+    @Operation(
+            summary = "내가 받은 방명록 조회 API",
+            description = """
+                현재 로그인된 사용자가 받은 방명록을 조회하는 API입니다.
+                - **로그인 사용자 ID**를 기반으로 소유자의 방명록을 가져옵니다.
+                """
+    )
     public List<Present> PresentsList(@Auth LoginUser loginUser){
         Long loginUserId = loginUser.getUserId();
         return presentService.getPresents(loginUserId);
