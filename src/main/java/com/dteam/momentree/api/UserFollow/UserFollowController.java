@@ -5,6 +5,7 @@ import com.dteam.momentree.application.config.auth.Auth;
 import com.dteam.momentree.application.config.auth.LoginUser;
 import com.dteam.momentree.domain.user.User;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class UserFollowController{
     @GetMapping("/{followedUserLoginId}")
     @Operation(summary = "followUser API", description = "팔로우할 유저를 찾아 팔로우를 하는 API")
     public String followUser(
-            @PathVariable(name = "followedUserLoginId") String followedUserLoginId,  @Auth LoginUser loginUser) {
+            @PathVariable(name = "followedUserLoginId") @Parameter(description = "팔로우하고싶은 유저의 string ID") String followedUserLoginId, @Auth LoginUser loginUser) {
         // 디버깅 로그: loginUser와 followedUserLoginId 확인
         log.info("followedUserLoginId: {}", followedUserLoginId);
         log.info("loginUser: {}", loginUser);
