@@ -16,7 +16,6 @@ public class DiaryController {
 
     private final DiaryService diaryService;
 
-
     @PostMapping("/create")
     @Operation(summary = "일기 생성 API")
     public ResponseEntity<DiaryResponse> createDiary(@RequestBody @Valid DiaryRequest request) {

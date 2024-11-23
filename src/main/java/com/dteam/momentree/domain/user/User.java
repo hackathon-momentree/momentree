@@ -14,6 +14,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+
     public static User of(String loginId, String password){
         User user = new User();
         user.loginId = loginId;
