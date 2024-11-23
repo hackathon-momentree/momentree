@@ -1,4 +1,4 @@
-package com.dteam.momentree.api.dairy.dto;
+package com.dteam.momentree.api.diary.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,5 +14,5 @@ import java.time.LocalDateTime;
 public class DiaryResponse {
     private Long id;
     private LocalDateTime createdDate;
-    private LocalDateTime modifiedDate;
+    private LocalDateTime lastModifiedDate;
 }

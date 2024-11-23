@@ -1,4 +1,4 @@
-package com.dteam.momentree.domain.dairy;
+package com.dteam.momentree.domain.diary;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

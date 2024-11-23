@@ -1,18 +1,25 @@
-package com.dteam.momentree.domain.dairy;
+package com.dteam.momentree.domain.diary;
 
+import com.dteam.momentree.domain.TimeBaseEntity;
 import com.dteam.momentree.domain.UserBaseEntity;
 import com.dteam.momentree.domain.user.User;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Diary extends UserBaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Long location;
 
     @Column(nullable = false)
@@ -24,9 +31,5 @@ public class Diary extends UserBaseEntity {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private OpenStatus openStatus;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
 
 }
