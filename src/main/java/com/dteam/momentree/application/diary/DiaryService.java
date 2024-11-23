@@ -25,7 +25,7 @@ public class DiaryService {
     private final DiaryRepository diaryRepository;
 
     public DiaryResponse createDiary(DiaryRequest request, int day, Long userId) {
-        if(request.getContent() == null){
+        if(StringUtils.isEmpty(request.getContent())){
             throw new BadRequestException(ExceptionType.INVALID_INPUT);
         }
         if (day < 1 || day > 31) {

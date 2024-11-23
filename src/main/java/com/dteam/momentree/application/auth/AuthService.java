@@ -10,6 +10,7 @@ import com.dteam.momentree.application.config.jwt.JwtManager;
 import com.dteam.momentree.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import io.micrometer.common.util.StringUtils;
 
 import java.util.Optional;
 
@@ -21,6 +22,9 @@ public class AuthService {
     private final JwtManager jwtManager;
 
     public SignInResponse signIn(SignInRequest request){
+        if(StringUtils.isEmpty(request.loginId()) || StringUtils.isEmpty(request.password())){
+            throw new BadRequestException(ExceptionType.INVALID_INPUT);
+        }
         Optional<User> user = userService.findByLoginId(request.loginId());
         if(user.isEmpty() || !PasswordUtil.matches(request.password(), user.get().getPassword())){
             throw new BadRequestException(ExceptionType.USER_NOT_VALID);
