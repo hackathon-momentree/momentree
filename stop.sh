@@ -1,1 +1,1 @@
-pkill -f 'java -jar'
+pkill -f 'java -jar' || true
